@@ -1,0 +1,25 @@
+
+1. dynamic + static node representation
+[in/out_flow || node_embedding || timestamps] -> iters -> node feat
+
+可解释性，节点本身的动态和静态属性建模
+
+2. Edge representation
+对于每个时间步， OD矩阵 (B,N1,N2) 与 (B,N2,N1)得到的矩阵， Pf和Pback,进行Diffusion的graph representation
+
+3. Diffusion Graph Convoltion
+Pf Xsrc W + Pb Xdst tW
+
+Pf = OD/rowsum(OD)
+pb =OD.T/rowsum(OD.T)
+
+Xsrc = [out || node_embedding || timestamp]
+Xdst = [in || node_embedding || timestamp]
+
+
+输入 OD Matrix, B,T,N,N
+    in/out flow, B,T,N,F
+    node embedding, B,N,F
+
+输出 OD Matrix
+    B,N,N
